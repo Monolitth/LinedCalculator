@@ -4,9 +4,9 @@
 #include "LogicWorker/logicworker.h"
 #include "WinAbout/winabout.h"
 
-class WinDrawer : public QWidget //об'явлення об'єкту
+class WinDrawer : public QWidget
 {
-    LogicWorker *logicworker;//об'єкт в об'єкті
+    LogicWorker *logicworker;
 
     WinAbout *aboutWindow;
 
@@ -14,11 +14,11 @@ class WinDrawer : public QWidget //об'явлення об'єкту
 
 private slots:
 
-    void showAbout();//функції в об'єкті
+    void showAbout();
 
 public:
-    WinDrawer(QWidget *parent = nullptr);//конструктор об'єкту
-    ~WinDrawer();//деструктор об'єкту
+    WinDrawer(QWidget *parent = nullptr);
+    ~WinDrawer();
 };
 
 #endif // WINDRAWER_H
