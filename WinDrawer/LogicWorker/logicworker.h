@@ -2,6 +2,7 @@
 #define LOGICWORKER_H
 
 #include <QtWidgets>
+#include <QtMath>
 
 class LogicWorker : public QObject
 {
@@ -19,6 +20,8 @@ private:
     float calculate(QVector<float> numbers, QVector<QChar> actions);
 
     void fillNumbersAndActions(QVector<float> *numbers, QVector<QChar> *actions);
+
+    bool logTyped{false};
 
 private slots:
 
