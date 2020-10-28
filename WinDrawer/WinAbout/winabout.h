@@ -1,15 +1,16 @@
 #ifndef WINABOUT_H
 #define WINABOUT_H
 
-#include <QWidgets>
+#include <QtWidgets>
 
 class WinAbout : public QWidget
 {
 private:
 
-    QVBoxLayout
+    QVBoxLayout *mainLayout;
 
     QLabel *header;
+    QLabel *text;
 
 public:
     explicit WinAbout(QWidget *parent = nullptr);

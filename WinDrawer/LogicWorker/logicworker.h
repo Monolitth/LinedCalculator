@@ -18,11 +18,15 @@ private:
 
     float calculate(QVector<float> numbers, QVector<QChar> actions);
 
+    void fillNumbersAndActions(QVector<float> *numbers, QVector<QChar> *actions);
+
 private slots:
 
     void characterType(int  character);
     void characterType(char character);
+
     void calculate();
+
     void editChop();
 
 public:
