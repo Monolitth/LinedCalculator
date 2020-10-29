@@ -99,8 +99,10 @@ void LogicWorker::characterType(char character)
             this->edit->text()[this->edit->text().length() - 1] == '/' )
         this->edit->setText(this->edit->text().left(this->edit->text().count() - 1) + character);
 
-    else if(this->logTyped && this->edit->text()[this->edit->text().length() - 1].isDigit())
+    else if(this->logTyped && this->edit->text()[this->edit->text().length() - 1].isDigit()){
         this->edit->setText(this->edit->text() + ')' + character);
+        this->logTyped = false;
+    }
 
     else if(this->logTyped && !this->edit->text()[this->edit->text().length() - 1].isDigit())
         this->edit->setText(this->edit->text().left(this->edit->text().count() - 4) + character);
@@ -133,10 +135,10 @@ void LogicWorker::fillNumbersAndActions(QVector<float> *numbers, QVector<QChar> 
             text.remove(0, 1);
         }
 
-        else
+        else if(isDigit && !text[0].isDigit())
             isDigit = false;
 
-        if(isLog && text[0] == ')'){
+        else if(isLog && text[0] == ')'){
             text.remove(0, 1);
             isLog = false;
         }
