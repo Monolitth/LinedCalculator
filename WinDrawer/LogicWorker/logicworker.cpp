@@ -123,39 +123,41 @@ void LogicWorker::fillNumbersAndActions(QVector<float> *numbers, QVector<QChar> 
     QVector<QString> temp;
 
     bool isLog = false;
+    bool isDigit = false;
+    int y = -1;
 
-    for(int i = 0, y = 0; i < text.length(); i++)//TODO: fix wrong number appending bug. Should rewrite function!!!
+    while(text.length() != 0)
     {
-        if(text[i] == '+' || text[i] == '-' || text[i] == '*' || text[i] == '/' || text[i] == '%'){
-            actions->push_back(text[i]);
-            y++;
-            continue;
+        if(isDigit && text[0].isDigit()){
+            temp[y].append(text[0]);
+            text.remove(0, 1);
         }
 
-        if(text[i] == 'l'){
-            actions->append(text[i]);
-            isLog = true;
-            y++;
-            continue;
-        }
+        else
+            isDigit = false;
 
-        if(isLog && (text[i] == 'o' || text[i] == 'g' || text[i] == '(')){
-            y++;
-            continue;
-        }
-
-        if(isLog && text[i] == ')'){
+        if(isLog && text[0] == ')'){
+            text.remove(0, 1);
             isLog = false;
+        }
+
+        else if(text[0].isDigit()){
+            isDigit = true;
+            temp.append(QString(text[0]));
             y++;
-            continue;
+            text.remove(0, 1);
         }
 
-        if(temp.length() < y){
-            temp.append(QString(text[i]));
-            continue;
+        else if(text[0] == '*' || text[0] == '/' || text[0] == '+' || text[0] == '-' || text[0] == '%'){
+            actions->append(text[0]);
+            text.remove(0, 1);
         }
 
-        temp[y].append(text[i]);
+        else if(text[0] == 'l'){
+            actions->append('l');
+            text.remove(0, 4);
+            isLog = true;
+        }
     }
 
     for(int i = 0; i < temp.length(); i++)
